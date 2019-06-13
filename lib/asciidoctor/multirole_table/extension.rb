@@ -1,22 +1,21 @@
 require 'asciidoctor'
 require 'asciidoctor/extensions'
-require "asciidoctor/multirole_table/version"
 
 module Asciidoctor
   module MultiroleTable
-    class EnhancedBlock < Asciidoctor::Extensions::BlockProcessor
-      PeriodRx = /\.(?= |$)/
+    class BlockProcessor < Asciidoctor::Extensions::BlockProcessor
 
       use_dsl
 
-      named :shout
-      on_context :paragraph
-      name_positional_attributes 'vol'
-      parse_content_as :simple
+      named :multirole_table
+      on_context :open
+      #parse_content_as :simple
 
       def process parent, reader, attrs
-        volume = ((attrs.delete 'vol') || 1).to_i
-        create_paragraph parent, (reader.lines.map {|l| l.upcase.gsub PeriodRx, '!' * volume }), attrs
+        # TODO: Replace this with code to recursively parse the block content, then walk
+        #       the tree, looking for table rows and cells to check for role assignments,
+        #       and handle those:
+        create_paragraph parent, (reader.lines.map {|l| l.upcase }), attrs
       end
     end
   end
