@@ -4,6 +4,10 @@ An Asciidoctor block processor extension that allows you to create
 tables whose rows and cells can be individually assigned roles, for
 special cases where you need to be able to individually style them.
 
+## Deprecation Warning
+
+> :warning: This is obsolete and has been replaced by [bytefield-svg](https://github.com/Deep-Symmetry/bytefield-svg).
+
 ## Installation
 
 Add this line to your application's Gemfile:
